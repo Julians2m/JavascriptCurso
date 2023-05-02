@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Lista de tareas</title>
+    </head>
+    <body>
+        <header>
+            <h1>Lista de tareas</h1>
+        </header>
+    
+        <main>
+            <div class="actions">
+                <button onclick="agregarTarea()">Agregar tarea</button>
+                <button onclick="editarTarea()">Editar tarea</button>
+                <button onclick="eliminarTarea()">Eliminar tarea</button>
+                <button onclick="completarTarea()">Completar tarea</button>
+                <button onclick="buscarPorNombre()">Buscar por nombre</button>
+                <button onclick="buscarPorEstado()">Buscar por estado</button>
+                <button onclick="ordenarPorFechaVencimiento()">Ordenar por fecha de vencimiento</button>
+            </div>
+    
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Fecha de creación</th>
+                        <th>Fecha de vencimiento</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody id="tareas">
+                    
+                </tbody>
+            </table>
+        </main>
+    </body>
+    </html>
+    
+    <script src="script.js"></script>
+</body>
+</html>
