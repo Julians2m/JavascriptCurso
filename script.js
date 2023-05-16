@@ -1,4 +1,5 @@
 
+
 class Tarea {
     constructor(nombre, descripcion, fechaCreacion, fechaVencimiento, estado) {
     this.nombre = nombre;
@@ -9,22 +10,49 @@ class Tarea {
     }
 }
 
-const listaTareas = [];
+let listaTareas = [];
+
+// Obtener las tareas almacenadas en localStorage al cargar la página
+if (localStorage.getItem('tareas')) {
+listaTareas = JSON.parse(localStorage.getItem('tareas'));
+mostrarTareas();
+}
+
 
 function agregarTarea() {
     const nombre = prompt("Ingrese el nombre de la tarea:");
     const descripcion = prompt("Ingrese una descripción de la tarea:");
     const fechaCreacion = new Date();
-    const fechaVencimiento = new Date(prompt("Ingrese la fecha de vencimiento (dd/mm/aaaa):"));
-    const estado = "pendiente"; // La tarea se crea siempre en estado "pendiente"
+    let fechaVencimiento = null;
+    
+    while (fechaVencimiento === null) {
+    const fechaInput = prompt("Ingrese la fecha de vencimiento (dd/mm/aaaa):");
+    const partesFecha = fechaInput.split("/");
+    
+    if (partesFecha.length === 3) {
+    const dia = parseInt(partesFecha[0], 10);
+    const mes = parseInt(partesFecha[1], 10) - 1;
+    const anio = parseInt(partesFecha[2], 10);
+    
+    if (!isNaN(dia) && !isNaN(mes) && !isNaN(anio) && dia >= 1 && dia <= 31 && mes >= 0 && mes <= 11 && anio >= 0) {
+        fechaVencimiento = new Date(anio, mes, dia);
+        }
+        }
+        
+        if (fechaVencimiento === null) {
+        alert("Fecha inválida. Por favor, ingrese una fecha en el formato dd/mm/aaaa.");
+        }
+    }
+    
+    const estado = "pendiente";
     const tarea = new Tarea(nombre, descripcion, fechaCreacion, fechaVencimiento, estado);
     listaTareas.push(tarea);
     mostrarTareas();
 }
 
 function editarTarea() {
-    const indice = prompt("Ingrese el índice de la tarea a editar:");
-    listaTareas[indice].nombre = prompt("Ingrese el nuevo nombre de la tarea:");
+        const indice = prompt("Ingrese el índice de la tarea a editar:");
+        listaTareas[indice].nombre = prompt("Ingrese el nuevo nombre de la tarea:");
     listaTareas[indice].descripcion = prompt("Ingrese la nueva descripción de la tarea:");
     listaTareas[indice].fechaVencimiento = new Date(prompt("Ingrese la nueva fecha de vencimiento (dd/mm/aaaa):"));
     mostrarTareas();
@@ -76,6 +104,9 @@ function mostrarTareas(tareas = listaTareas) {
         }
         tbody.appendChild(fila);
     });
+}
+function guardarTareasEnLocalStorage() {
+    localStorage.setItem('tareas', JSON.stringify(listaTareas));
 }
 
 
