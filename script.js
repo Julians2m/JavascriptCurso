@@ -12,7 +12,6 @@ class Tarea {
 
 let listaTareas = [];
 
-// Obtener las tareas almacenadas en localStorage al cargar la página
 if (localStorage.getItem('tareas')) {
 listaTareas = JSON.parse(localStorage.getItem('tareas'));
 mostrarTareas();
